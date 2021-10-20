@@ -106,27 +106,62 @@ const ironman = {
 
 const dice = (faces = 20) => {return Math.floor(Math.random()*faces)+1}
 
-// let {intelligence, strength, speed, durability, power, combat} = ironman['powerstats']
-
 class Figther {
-    // constructor(intelligence, strength, speed, durability, power, combat) {
     constructor(character) {
         let {intelligence, strength, speed, durability, power, combat} = character['powerstats']
-        this.intelligence = intelligence
-        this.strength = strength
-        this.speed = speed
-        this.durability = durability
-        this.power = power
-        this.combat = combat
+        this.name = character['name']
+        this.intelligence = Number(intelligence)
+        this.strength = Number(strength)
+        this.speed = Number(speed)
+        this.durability = Number(durability)
+        this.power = Number(power)
+        this.combat = Number(combat)
     }
 }
 
-// const Batman = new Figther(ironman['powerstats'])
-
 const Ironman = new Figther(ironman)
-
-console.log(Ironman.combat)
-
 const Batman = new Figther(batman)
 
-console.log(Batman.power)
+
+
+const attack = (attacker, defender) => {
+    console.log(`${attacker.name} tries to attack ${defender.name} !`)
+    let attackRoll = (dice() - 10) * 10
+    console.log(`Dice result : ${attackRoll}. ${attacker.name}'s combat : ${attacker.combat}. ${defender.name}'s combat : ${defender.combat}`)
+    console.log((attackRoll + attacker.combat - defender.combat))
+    if ((attackRoll + attacker.combat - defender.combat) > 0) {
+        console.log('It succeeds !')
+        return true
+    }
+    else {
+        console.log('It misses...')
+        return false
+    }
+}
+
+
+const fight = (fighterA, fighterB) => {
+    console.log(`On my left, ${fighterA.name}`)
+    console.log(`And on my right, ${fighterB.name}`)
+
+    lifeA = fighterA.durability
+    lifeB = fighterB.durability
+
+    while(lifeA > 0 && lifeB > 0) {
+        
+        //CHECK VIUTESSE QUI INITIATIVE
+        if (attack(fighterA, fighterB)) {
+            lifeB -= 15
+            console.log(`${fighterB.name} now has ${lifeB} life points !`)
+        }
+
+        if (attack(fighterB, fighterA)) {
+            lifeA -= 15
+            console.log(`${fighterA.name} now has ${lifeA} life points !`)
+        }
+
+    }
+    console.log("Game over")
+}
+
+fight(Ironman, Batman)
