@@ -106,14 +106,12 @@ const ironman = {
 
 const dice = (faces = 20) => {return Math.floor(Math.random()*faces)+1}
 
-console.log('it works')
-
-console.log(batman['powerstats']['intelligence'])
-console.log(ironman['powerstats']['intelligence'])
-
+// let {intelligence, strength, speed, durability, power, combat} = ironman['powerstats']
 
 class Figther {
-    constructor(intelligence, strength, speed, durability, power, combat) {
+    // constructor(intelligence, strength, speed, durability, power, combat) {
+    constructor(character) {
+        let {intelligence, strength, speed, durability, power, combat} = character['powerstats']
         this.intelligence = intelligence
         this.strength = strength
         this.speed = speed
@@ -123,3 +121,12 @@ class Figther {
     }
 }
 
+// const Batman = new Figther(ironman['powerstats'])
+
+const Ironman = new Figther(ironman)
+
+console.log(Ironman.combat)
+
+const Batman = new Figther(batman)
+
+console.log(Batman.power)
