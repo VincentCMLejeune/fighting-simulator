@@ -10,43 +10,6 @@ const batman = {
         "power": "47",
         "combat": "100"
     },
-    "biography": {
-        "full-name": "Bruce Wayne",
-        "alter-egos": "No alter egos found.",
-        "aliases": [
-            "Insider",
-            "Matches Malone"
-        ],
-        "place-of-birth": "Crest Hill, Bristol Township; Gotham County",
-        "first-appearance": "Detective Comics #27",
-        "publisher": "DC Comics",
-        "alignment": "good"
-    },
-    "appearance": {
-        "gender": "Male",
-        "race": "Human",
-        "height": [
-            "6'2",
-            "188 cm"
-        ],
-        "weight": [
-            "210 lb",
-            "95 kg"
-        ],
-        "eye-color": "blue",
-        "hair-color": "black"
-    },
-    "work": {
-        "occupation": "Businessman",
-        "base": "Batcave, Stately Wayne Manor, Gotham City; Hall of Justice, Justice League Watchtower"
-    },
-    "connections": {
-        "group-affiliation": "Batman Family, Batman Incorporated, Justice League, Outsiders, Wayne Enterprises, Club of Heroes, formerly White Lantern Corps, Sinestro Corps",
-        "relatives": "Damian Wayne (son), Dick Grayson (adopted son), Tim Drake (adopted son), Jason Todd (adopted son), Cassandra Cain (adopted ward)\nMartha Wayne (mother, deceased), Thomas Wayne (father, deceased), Alfred Pennyworth (former guardian), Roderick Kane (grandfather, deceased), Elizabeth Kane (grandmother, deceased), Nathan Kane (uncle, deceased), Simon Hurt (ancestor), Wayne Family"
-    },
-    "image": {
-        "url": "https://www.superherodb.com/pictures2/portraits/10/100/639.jpg"
-    }
 }
 
 const ironman = {
@@ -61,52 +24,123 @@ const ironman = {
         "power": "100",
         "combat": "64"
     },
-    "biography": {
-        "full-name": "Tony Stark",
-        "alter-egos": "No alter egos found.",
-        "aliases": [
-            "Iron Knight",
-            "Hogan Potts",
-            "Spare Parts Man",
-            "Cobalt Man II",
-            "Crimson Dynamo",
-            "Ironman"
-        ],
-        "place-of-birth": "Long Island, New York",
-        "first-appearance": "Tales of Suspence #39 (March, 1963)",
-        "publisher": "Marvel Comics",
-        "alignment": "good"
+}
+
+const alien = {
+    "response": "success",
+    "id": "18",
+    "name": "Alien",
+    "powerstats": {
+        "intelligence": "50",
+        "strength": "28",
+        "speed": "42",
+        "durability": "90",
+        "power": "57",
+        "combat": "60"
     },
-    "appearance": {
-        "gender": "Male",
-        "race": "Human",
-        "height": [
-            "6'6",
-            "198 cm"
-        ],
-        "weight": [
-            "425 lb",
-            "191 kg"
-        ],
-        "eye-color": "Blue",
-        "hair-color": "Black"
+}
+
+const astroboy = {
+    "response": "success",
+    "id": "47",
+    "name": "Astro Boy",
+    "powerstats": {
+        "intelligence": "null",
+        "strength": "90",
+        "speed": "null",
+        "durability": "null",
+        "power": "null",
+        "combat": "null"
     },
-    "work": {
-        "occupation": "Inventor, Industrialist; former United States Secretary of Defense",
-        "base": "Seattle, Washington"
+}
+
+const vader = {
+    "response": "success",
+    "id": "208",
+    "name": "Darth Vader",
+    "powerstats": {
+        "intelligence": "69",
+        "strength": "48",
+        "speed": "33",
+        "durability": "35",
+        "power": "100",
+        "combat": "100"
     },
-    "connections": {
-        "group-affiliation": "Avengers, Illuminati, Stark Resilient; formerly S.H.I.E.L.D., leader of Stark Enterprises, the Pro-Registration Superhero Unit, New Avengers, Mighty Avengers, Hellfire Club, Force Works, Avengers West Coast, United States Department of Defense.",
-        "relatives": "Howard Anthony Stark (father, deceased), Maria Stark (mother, deceased), Morgan Stark (cousin), Isaac Stark (ancestor)"
+}
+
+const goku = {
+    "response": "success",
+    "id": "289",
+    "name": "Goku",
+    "powerstats": {
+        "intelligence": "56",
+        "strength": "100",
+        "speed": "75",
+        "durability": "90",
+        "power": "100",
+        "combat": "100"
     },
-    "image": {
-        "url": "https://www.superherodb.com/pictures2/portraits/10/100/85.jpg"
-    }
+}
+
+const potter = {
+    "response": "success",
+    "id": "310",
+    "name": "Harry Potter",
+    "powerstats": {
+        "intelligence": "75",
+        "strength": "7",
+        "speed": "21",
+        "durability": "10",
+        "power": "100",
+        "combat": "50"
+    },
+}
+
+const naruto = {
+    "response": "success",
+    "id": "485",
+    "name": "Naruto Uzumaki",
+    "powerstats": {
+        "intelligence": "50",
+        "strength": "80",
+        "speed": "32",
+        "durability": "80",
+        "power": "100",
+        "combat": "100"
+    },
+}
+
+const wonder = {
+    "response": "success",
+    "id": "720",
+    "name": "Wonder Woman",
+    "powerstats": {
+        "intelligence": "88",
+        "strength": "100",
+        "speed": "79",
+        "durability": "100",
+        "power": "100",
+        "combat": "100"
+    },
+}
+
+const harley = {
+    "response": "success",
+    "id": "309",
+    "name": "Harley Quinn",
+    "powerstats": {
+        "intelligence": "88",
+        "strength": "12",
+        "speed": "33",
+        "durability": "65",
+        "power": "55",
+        "combat": "80"
+    },
 }
 
 const dice = (faces = 20) => {return Math.floor(Math.random()*faces)+1}
 
-class Figther {
+class Fighter {
     constructor(character) {
         let {intelligence, strength, speed, durability, power, combat} = character['powerstats']
         this.name = character['name']
@@ -119,9 +153,16 @@ class Figther {
     }
 }
 
-const Ironman = new Figther(ironman)
-const Batman = new Figther(batman)
-
+const Alien = new Fighter(alien)
+const Astroboy = new Fighter(astroboy)
+const Batman = new Fighter(batman)
+const Goku = new Fighter(goku)
+const Harley = new Fighter(harley)
+const Ironman = new Fighter(ironman)
+const Naruto = new Fighter(naruto)
+const Potter = new Fighter(potter)
+const Vader = new Fighter(vader)
+const Wonder = new Fighter(wonder)
 
 
 const attack = (attacker, defender) => {
@@ -139,6 +180,13 @@ const attack = (attacker, defender) => {
     }
 }
 
+const calcDamage = (damage) => {
+    let damageRoll = Math.random()
+    let totalDamage = Math.round(damageRoll * damage)
+    console.log(`Dice result : ${damageRoll}. Basic damage : ${damage}. Total damage : ${totalDamage}`)
+    return totalDamage
+}
+
 const fight = (fighterA, fighterB) => {
     lifeA = fighterA.durability
     lifeB = fighterB.durability
@@ -149,11 +197,9 @@ const fight = (fighterA, fighterB) => {
     console.log(`And on my right, ${fighterB.name} with ${lifeB} life points`)
     
     while(true) {
-        
-        //CHECK VIUTESSE QUI INITIATIVE
         if (attack(fighterA, fighterB)) {
-            lifeB -= damageA
-            console.log(`${damageA} points of damage ! ${fighterB.name} now has ${lifeB} life points !`)
+            lifeB -= calcDamage(damageA)
+            console.log(`${fighterB.name} now has ${lifeB} life points !`)
             if (lifeB <= 0) {
                 console.log(`${fighterB.name} falls on the ground... ${fighterA.name} is victorious !`)
                 return undefined
@@ -161,8 +207,8 @@ const fight = (fighterA, fighterB) => {
         }
 
         if (attack(fighterB, fighterA)) {
-            lifeA -= damageB
-            console.log(`${damageB} points of damage ! ${fighterA.name} now has ${lifeA} life points !`)
+            lifeA -= calcDamage(damageB)
+            console.log(`${fighterA.name} now has ${lifeA} life points !`)
             if (lifeA <= 0) {
                 console.log(`${fighterA.name} falls on the ground... ${fighterB.name} is victorious !`)
                 return undefined
@@ -172,4 +218,4 @@ const fight = (fighterA, fighterB) => {
     }
 }
 
-fight(Ironman, Batman)
+fight(Goku, Vader)
