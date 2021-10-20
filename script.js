@@ -139,29 +139,37 @@ const attack = (attacker, defender) => {
     }
 }
 
-
 const fight = (fighterA, fighterB) => {
-    console.log(`On my left, ${fighterA.name}`)
-    console.log(`And on my right, ${fighterB.name}`)
-
     lifeA = fighterA.durability
     lifeB = fighterB.durability
+    damageA = Math.max(fighterA.strength, fighterA.power)
+    damageB = Math.max(fighterB.strength, fighterB.power)
 
-    while(lifeA > 0 && lifeB > 0) {
+    console.log(`On my left, ${fighterA.name} with ${lifeA} life points`)
+    console.log(`And on my right, ${fighterB.name} with ${lifeB} life points`)
+    
+    while(true) {
         
         //CHECK VIUTESSE QUI INITIATIVE
         if (attack(fighterA, fighterB)) {
-            lifeB -= 15
-            console.log(`${fighterB.name} now has ${lifeB} life points !`)
+            lifeB -= damageA
+            console.log(`${damageA} points of damage ! ${fighterB.name} now has ${lifeB} life points !`)
+            if (lifeB <= 0) {
+                console.log(`${fighterB.name} falls on the ground... ${fighterA.name} is victorious !`)
+                return undefined
+            }
         }
 
         if (attack(fighterB, fighterA)) {
-            lifeA -= 15
-            console.log(`${fighterA.name} now has ${lifeA} life points !`)
+            lifeA -= damageB
+            console.log(`${damageB} points of damage ! ${fighterA.name} now has ${lifeA} life points !`)
+            if (lifeA <= 0) {
+                console.log(`${fighterA.name} falls on the ground... ${fighterB.name} is victorious !`)
+                return undefined
+            }
         }
 
     }
-    console.log("Game over")
 }
 
 fight(Ironman, Batman)
