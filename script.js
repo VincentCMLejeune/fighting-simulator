@@ -40,20 +40,6 @@ const alien = {
     },
 }
 
-const astroboy = {
-    "response": "success",
-    "id": "47",
-    "name": "Astro Boy",
-    "powerstats": {
-        "intelligence": "null",
-        "strength": "90",
-        "speed": "null",
-        "durability": "null",
-        "power": "null",
-        "combat": "null"
-    },
-}
-
 const vader = {
     "response": "success",
     "id": "208",
@@ -138,7 +124,9 @@ const harley = {
     },
 }
 
-const dice = (faces = 20) => {return Math.floor(Math.random()*faces)+1}
+import attack from "./attack.js"
+import calcDamage from "./calcDamage.js"
+import initiativeRoll from "./initiativeRoll.js"
 
 class Fighter {
     constructor(character) {
@@ -153,8 +141,9 @@ class Fighter {
     }
 }
 
+
+
 const Alien = new Fighter(alien)
-const Astroboy = new Fighter(astroboy)
 const Batman = new Fighter(batman)
 const Goku = new Fighter(goku)
 const Harley = new Fighter(harley)
@@ -165,57 +154,49 @@ const Vader = new Fighter(vader)
 const Wonder = new Fighter(wonder)
 
 
-const attack = (attacker, defender) => {
-    console.log(`${attacker.name} tries to attack ${defender.name} !`)
-    let attackRoll = (dice() - 10) * 10
-    console.log(`Dice result : ${attackRoll}. ${attacker.name}'s combat : ${attacker.combat}. ${defender.name}'s combat : ${defender.combat}`)
-    console.log((attackRoll + attacker.combat - defender.combat))
-    if ((attackRoll + attacker.combat - defender.combat) > 0) {
-        console.log('It succeeds !')
-        return true
-    }
-    else {
-        console.log('It misses...')
-        return false
-    }
-}
-
-const calcDamage = (damage) => {
-    let damageRoll = Math.random()
-    let totalDamage = Math.round(damageRoll * damage)
-    console.log(`Dice result : ${damageRoll}. Basic damage : ${damage}. Total damage : ${totalDamage}`)
-    return totalDamage
-}
-
 const fight = (fighterA, fighterB) => {
-    lifeA = fighterA.durability
-    lifeB = fighterB.durability
-    damageA = Math.max(fighterA.strength, fighterA.power)
-    damageB = Math.max(fighterB.strength, fighterB.power)
+    let damageA = fighterA.strength + fighterA.power
+    let damageB = fighterB.strength + fighterB.power
+    let lifeA = fighterA.durability
+    let lifeB = fighterB.durability
+    let initiativeA = fighterA.speed
+    let initiativeB = fighterB.speed
+    let turn
 
-    console.log(`On my left, ${fighterA.name} with ${lifeA} life points`)
-    console.log(`And on my right, ${fighterB.name} with ${lifeB} life points`)
-    
+    console.log(`On my left, ${fighterA.name} with ${lifeA} life points, ${damageA} possible damage and ${initiativeA} speed !`)
+    console.log(`And on my right, ${fighterB.name} with ${lifeB} life points, ${damageB} possible damage and ${initiativeB} speed !`)
+
     while(true) {
-        if (attack(fighterA, fighterB)) {
-            lifeB -= calcDamage(damageA)
-            console.log(`${fighterB.name} now has ${lifeB} life points !`)
-            if (lifeB <= 0) {
-                console.log(`${fighterB.name} falls on the ground... ${fighterA.name} is victorious !`)
-                return undefined
+        turn = initiativeRoll(initiativeA, initiativeB)
+
+        if (turn == 'A') {
+            console.log(`${fighterA.name} has the initiative !`)
+
+            if (attack(fighterA, fighterB)) {
+                lifeB -= calcDamage(damageA)
+                console.log(`${fighterB.name} now has ${lifeB} life points !`)
+                if (lifeB <= 0) {
+                    console.log(`${fighterB.name} falls on the ground... ${fighterA.name} is victorious !`)
+                    return undefined
+                }
             }
         }
 
-        if (attack(fighterB, fighterA)) {
-            lifeA -= calcDamage(damageB)
-            console.log(`${fighterA.name} now has ${lifeA} life points !`)
-            if (lifeA <= 0) {
-                console.log(`${fighterA.name} falls on the ground... ${fighterB.name} is victorious !`)
-                return undefined
+        else if (turn == 'B') {
+            console.log(`${fighterB.name} has the initiative !`)
+
+            if (attack(fighterB, fighterA)) {
+                lifeA -= calcDamage(damageB)
+                console.log(`${fighterA.name} now has ${lifeA} life points !`)
+                if (lifeA <= 0) {
+                    console.log(`${fighterA.name} falls on the ground... ${fighterB.name} is victorious !`)
+                    return undefined
+                }
             }
         }
+
 
     }
 }
 
-fight(Goku, Vader)
+fight(Batman, Harley)
