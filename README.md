@@ -1,1 +1,4 @@
 # fighting-simulator
+
+
+GERER LE CAS OU LES CARACTERISTIQUES SONT NULL
