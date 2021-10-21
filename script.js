@@ -124,9 +124,9 @@ const harley = {
     },
 }
 
-import attack from "./attack.js"
+import attackCheck from "./attackCheck.js"
 import calcDamage from "./calcDamage.js"
-import initiativeRoll from "./initiativeRoll.js"
+import initiativeCheck from "./initiativeCheck.js"
 
 class Fighter {
     constructor(character) {
@@ -140,7 +140,6 @@ class Fighter {
         this.combat = Number(combat)
     }
 }
-
 
 
 const Alien = new Fighter(alien)
@@ -167,12 +166,14 @@ const fight = (fighterA, fighterB) => {
     console.log(`And on my right, ${fighterB.name} with ${lifeB} life points, ${damageB} possible damage and ${initiativeB} speed !`)
 
     while(true) {
-        turn = initiativeRoll(initiativeA, initiativeB)
+        turn = initiativeCheck(initiativeA, initiativeB)
 
         if (turn == 'A') {
             console.log(`${fighterA.name} has the initiative !`)
+            initiativeA /= 2
+            initiativeB = fighterB.speed
 
-            if (attack(fighterA, fighterB)) {
+            if (attackCheck(fighterA, fighterB) == true) {
                 lifeB -= calcDamage(damageA)
                 console.log(`${fighterB.name} now has ${lifeB} life points !`)
                 if (lifeB <= 0) {
@@ -184,8 +185,10 @@ const fight = (fighterA, fighterB) => {
 
         else if (turn == 'B') {
             console.log(`${fighterB.name} has the initiative !`)
+            initiativeB /= 2
+            initiativeA = fighterA.speed
 
-            if (attack(fighterB, fighterA)) {
+            if (attackCheck(fighterB, fighterA) == true) {
                 lifeA -= calcDamage(damageB)
                 console.log(`${fighterA.name} now has ${lifeA} life points !`)
                 if (lifeA <= 0) {
