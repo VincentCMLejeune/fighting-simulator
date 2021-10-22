@@ -206,6 +206,7 @@ const hellboy = {
         }
 
 import attackCheck from "./attackCheck.js"
+import basicRoster from "./basicRoster.js"
 import calcDamage from "./calcDamage.js"
 import initiativeCheck from "./initiativeCheck.js"
 
@@ -288,4 +289,6 @@ const fight = (fighterA, fighterB) => {
     }
 }
 
-fight(Saitama, Hellboy)
+// fight(Batman, Harley)
+
+console.log(basicRoster['mickey']['name'])
