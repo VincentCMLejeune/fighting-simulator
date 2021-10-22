@@ -5,8 +5,11 @@ export default function attackCheck(attacker, defender) {
     if (attacker.gender == 'Female') {
         pronoun = 'She'
     }
-    else {
+    else if (attacker.gender == 'Male') {
         pronoun = 'He'
+    }
+    else {
+        pronoun = 'It'
     }
 
     process.stdout.write(`${pronoun} tries to attack ${defender.name}... `)
