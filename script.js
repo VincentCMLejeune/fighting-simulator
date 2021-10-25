@@ -2,6 +2,7 @@ import attackCheck from "./attackCheck.js"
 import basicRoster from "./basicRoster.js"
 import calcDamage from "./calcDamage.js"
 import initiativeCheck from "./initiativeCheck.js"
+import pronoun from "./pronoun.js"
 class Fighter {
     constructor(character) {
         let {intelligence, strength, speed, durability, power, combat} = character['powerstats']
@@ -93,6 +94,8 @@ const fight = (fighterA, fighterB) => {
     let initiativeB = fighterB.speed
     let lifeA = fighterA.durability
     let lifeB = fighterB.durability
+    const initialLifeA = lifeA
+    const initialLifeB = lifeB
 
     let initiative
     let turns = 0
@@ -103,50 +106,66 @@ const fight = (fighterA, fighterB) => {
         turns++
 
 
-        initiative = initiativeCheck(initiativeA, initiativeB)
+        // initiative = initiativeCheck(initiativeA, initiativeB)
+        initiative = 'A'
 
         if (initiative == 'A') {
             if (initiativeA == fighterA.speed) {
                 console.log(`${fighterA.name}'s turn' !`)
             }
-
             initiativeA /= 2
             initiativeB = fighterB.speed
 
-            if (attackCheck(fighterA, fighterB) == true) {
-                let damages = calcDamage(damageA)
-                lifeB -= damages
+            let damage = attackCheck(fighterA, fighterB, damageA, damageB)
+            console.log(damage)
 
-                console.log(`${damages} points of damage : ${fighterB.name} now has ${lifeB} life points !`)
-
-                if (lifeB <= 0) {
-                    console.log(`${fighterB.name} falls on the ground... ${fighterA.name} is victorious ! \n`)
-                    return undefined
-                }
+            if (damage == 0) {
+                initiativeA = -100
+                lifeA -= 3
+                console.log(`EPIC FAIL : ${fighterA.name} trips (-3PV => ${lifeA}/${initialLifeA}).`)
             }
+
+            else {
+
+            }
+
+            lifeB--
+                
+
+
+            }
+
+        // else if (initiative == 'B') {
+
+        //     if (initiativeB == fighterB.speed) {
+        //         console.log(`${fighterB.name}'s turn' !`)
+        //     }            
+
+        //     initiativeB /= 2
+        //     initiativeA = fighterA.speed
+
+        //     if (attackCheck(fighterB, fighterA) > 0) {
+
+        //         let damages = calcDamage(damageB)
+        //         lifeA -= damages
+
+        //         console.log(`${damages} points of damage : ${fighterA.name} now has ${lifeA} life points !`)
+
+
+        //     }
+        // }
+    // }
+
+
+        if (lifeA <= 0) {
+            console.log(`${fighterA.name} falls on the ground... ${fighterB.name} is victorious ! \n`)
+            return undefined
         }
 
-        else if (initiative == 'B') {
-
-            if (initiativeB == fighterB.speed) {
-                console.log(`${fighterB.name}'s turn' !`)
-            }            
-
-            initiativeB /= 2
-            initiativeA = fighterA.speed
-
-            if (attackCheck(fighterB, fighterA) == true) {
-                let damages = calcDamage(damageB)
-                lifeA -= damages
-                console.log(`${damages} points of damage : ${fighterA.name} now has ${lifeA} life points !`)
-                if (lifeA <= 0) {
-                    console.log(`${fighterA.name} falls on the ground... ${fighterB.name} is victorious ! \n`)
-                    return undefined
-                }
-            }
+        else if (lifeB <= 0) {
+            console.log(`${fighterB.name} falls on the ground... ${fighterA.name} is victorious ! \n`)
+            return undefined
         }
-
-
     }
 }
 

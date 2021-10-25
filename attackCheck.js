@@ -1,15 +1,34 @@
-export default function attackCheck(attacker, defender) {
+const dice = (faces = 20) => {return Math.ceil(Math.random()*faces)}
 
-    // process.stdout.write(`${pronoun} tries to attack ${defender.name}... `)
-    let attackRoll = (Math.floor(Math.random()*20) - 10) * 10
-    // console.log(`Dice result : ${attackRoll}. ${attacker.name}'s combat : ${attacker.combat}. ${defender.name}'s combat : ${defender.combat}`)
-    // console.log((attackRoll + attacker.combat - defender.combat))
-    if ((attackRoll + attacker.combat - defender.combat) > 0) {
-        // console.log('and it succeeds !')
-        return true
+export default function attackCheck(attacker, defender, damageAttacker, damageDefender) {
+    let result = dice()
+    console.log('\nDice :', result)
+
+    if (result == 1) {
+        return -100
     }
+
+    else if (result == 20) {
+        return 100
+    }
+
     else {
-        console.log('Miss')
-        return false
+        
+        // console.log('Attacker combat :', attacker.combat)
+        // console.log('Defender combat :', defender.combat)
+        return (result-10)*5 + attacker.combat - defender.combat
     }
+
+
+
+
+
+    // let attackRoll = (Math.floor(Math.random()*20) - 10) * 10
+    // if ((attackRoll + attacker.combat - defender.combat) > 0) {
+    //     return true
+    // }
+    // else {
+    //     console.log('Miss')
+    //     return false
+    // }
 }
