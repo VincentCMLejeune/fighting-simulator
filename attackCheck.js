@@ -1,7 +1,7 @@
 export default function attackCheck(attacker, defender) {
 
     // process.stdout.write(`${pronoun} tries to attack ${defender.name}... `)
-    let attackRoll = (dice() - 10) * 10
+    let attackRoll = (Math.floor(Math.random()*20) - 10) * 10
     // console.log(`Dice result : ${attackRoll}. ${attacker.name}'s combat : ${attacker.combat}. ${defender.name}'s combat : ${defender.combat}`)
     // console.log((attackRoll + attacker.combat - defender.combat))
     if ((attackRoll + attacker.combat - defender.combat) > 0) {
