@@ -82,10 +82,7 @@ roster.push(Terminator)
 const Wonder = new Fighter(basicRoster[720])
 roster.push(Wonder)
 
-// TEST
-// for (let hero of roster) {
-//     console.log(`${hero.name} : ${hero.combat}`)
-// }
+
 
 const fight = (fighterA, fighterB) => {
     let damageA = fighterA.strength + fighterA.power
@@ -220,4 +217,20 @@ const fight = (fighterA, fighterB) => {
 }
 
 
-fight(Batman, HarleyQuinn)
+
+// 0:Alien - 1:Batman - 2:Ben 10 - 3:Black Panther - 4:Black Widow - 5:Boba Fett
+// 6:Buffy - 7:Catwoman - 8:Darth Vader - 9:Deadpool - 10:Donatello
+// 11:Elastigirl - 12:Elektra - 13:Godzilla - 14:Goku - 15:Groot
+// 16:Harley Quinn - 17:Harry Potter - 18:Indiana Jones - 19:Iron Man
+// 20:Katniss Everdeen - 21:Naruto Uzumaki - 22:Rambo - 23:Rey - 24:Sauron
+// 25:Spock - 26:Storm - 27:Superman - 28:T-800 - 29:Wonder Woman
+
+// POUR TESTER LES COMBATS, ATTRIBUER A FIRST ET SECOND CI-DESSOUS DEUX NOMBRES
+// DE 0 A 29 (LES HEROS CORRESPONDANTS SONT PRECISES CI-DESSUS)
+
+
+let first = 5
+let second = 10
+
+
+fight(roster[first], roster[second])
