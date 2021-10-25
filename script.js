@@ -13,6 +13,7 @@ class Fighter {
         this.power = Number(power)
         this.combat = Number(combat)
 
+        this.alignment = character['biography']['alignment']
         this.gender = character['appearance']['gender']
     }
 }
@@ -82,7 +83,7 @@ roster.push(Wonder)
 
 // TEST
 // for (let hero of roster) {
-//     console.log(`${hero.name} : ${hero.size}`)
+//     console.log(`${hero.name} : ${hero.combat}`)
 // }
 
 const fight = (fighterA, fighterB) => {
@@ -96,26 +97,28 @@ const fight = (fighterA, fighterB) => {
     let initiative
     let turns = 0
 
-    console.log('\nWelcome to the Bagarre Club ! Tonight we have a special show...')
-    console.log(`On my left, ${fighterA.name} with ${lifeA} life points, ${damageA} possible damage and ${initiativeA} speed !`)
-    console.log(`And on my right, ${fighterB.name} with ${lifeB} life points, ${damageB} possible damage and ${initiativeB} speed !`)
+    console.log(`${fighterA.name} VS ${fighterB.name} : FIGHT !`)
 
     while(true) {
         turns++
-        console.log("\nTurn", turns)
 
 
         initiative = initiativeCheck(initiativeA, initiativeB)
 
         if (initiative == 'A') {
-            console.log(`${fighterA.name} has the initiative !`)
+            if (initiativeA == fighterA.speed) {
+                console.log(`${fighterA.name}'s turn' !`)
+            }
+
             initiativeA /= 2
             initiativeB = fighterB.speed
 
             if (attackCheck(fighterA, fighterB) == true) {
                 let damages = calcDamage(damageA)
                 lifeB -= damages
+
                 console.log(`${damages} points of damage : ${fighterB.name} now has ${lifeB} life points !`)
+
                 if (lifeB <= 0) {
                     console.log(`${fighterB.name} falls on the ground... ${fighterA.name} is victorious ! \n`)
                     return undefined
@@ -124,7 +127,11 @@ const fight = (fighterA, fighterB) => {
         }
 
         else if (initiative == 'B') {
-            console.log(`${fighterB.name} has the initiative !`)
+
+            if (initiativeB == fighterB.speed) {
+                console.log(`${fighterB.name}'s turn' !`)
+            }            
+
             initiativeB /= 2
             initiativeA = fighterA.speed
 
@@ -142,5 +149,6 @@ const fight = (fighterA, fighterB) => {
 
     }
 }
+
 
 fight(Batman, HarleyQuinn)
