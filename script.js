@@ -169,7 +169,7 @@ const fight = (fighterA, fighterB) => {
                 console.log(`EPIC FAIL : ${fighterB.name} trips (-3PV => ${lifeB}/${initialLifeB}).`)
             }
 
-            else if (damage < -50) {
+            else if (damage < -33) {
                 initiativeB /= 2
                 console.log(`Dodged...`)
             }
@@ -180,7 +180,7 @@ const fight = (fighterA, fighterB) => {
                 console.log(`Blocked (-${punch}PV => ${lifeA}/${initialLifeA}).`)                
             }
 
-            else if (damage < 50) {
+            else if (damage < 33) {
                 let punch = Math.floor(damageB * 0.2)
                 lifeA -= punch
                 console.log(`Hit (-${punch}PV => ${lifeA}/${initialLifeA}).`)                
@@ -229,8 +229,8 @@ const fight = (fighterA, fighterB) => {
 // DE 0 A 29 (LES HEROS CORRESPONDANTS SONT PRECISES CI-DESSUS)
 
 
-let first = 5
-let second = 10
+let first = 28
+let second = 27
 
 
 fight(roster[first], roster[second])
