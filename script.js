@@ -106,64 +106,118 @@ const fight = (fighterA, fighterB) => {
         turns++
 
 
-        // initiative = initiativeCheck(initiativeA, initiativeB)
-        initiative = 'A'
+        initiative = initiativeCheck(initiativeA, initiativeB)
 
         if (initiative == 'A') {
             if (initiativeA == fighterA.speed) {
-                console.log(`${fighterA.name}'s turn' !`)
+                console.log(`\n${fighterA.name}'s turn' !`)
             }
             initiativeA /= 2
             initiativeB = fighterB.speed
 
             let damage = attackCheck(fighterA, fighterB, damageA, damageB)
-            console.log(damage)
+            // console.log(damage)
 
-            if (damage == 0) {
+            if (damage <= -100) {
                 initiativeA = -100
                 lifeA -= 3
                 console.log(`EPIC FAIL : ${fighterA.name} trips (-3PV => ${lifeA}/${initialLifeA}).`)
             }
 
+            else if (damage < -50) {
+                initiativeA /= 2
+                let punch = Math.floor(damageA * 0.1)
+                lifeB -= punch
+                console.log(`Blocked (-${punch}PV => ${lifeB}/${initialLifeB}).`)
+            }
+
+            else if (damage < 0) {
+                let punch = Math.floor(damageA * 0.2)
+                lifeB -= punch
+                console.log(`Weak (-${punch}PV => ${lifeB}/${initialLifeB}).`)                
+            }
+
+            else if (damage < 50) {
+                let punch = Math.floor(damageA * 0.3)
+                lifeB -= punch
+                console.log(`Good (-${punch}PV => ${lifeB}/${initialLifeB}).`)                
+            }
+
+            else if (damage < 100) {
+                let punch = Math.floor(damageA * 0.4)
+                lifeB -= punch
+                console.log(`Strong (-${punch}PV => ${lifeB}/${initialLifeB}).`)
+            }
+
             else {
+                initiativeA = fighterA.speed - 1
+                let punch = Math.floor(damageA * 0.5)
+                lifeB -= punch
+                console.log(`CRITICAL : ${fighterB.name} stumbles (-${punch}PV => ${lifeB}/${initialLifeB}).`)
+            }
 
             }
 
-            lifeB--
-                
+        else if (initiative == 'B') {
+            if (initiativeB == fighterB.speed) {
+                console.log(`\n${fighterB.name}'s turn' !`)
+            }
+            initiativeB /= 2
+            initiativeA = fighterA.speed
 
+            let damage = attackCheck(fighterB, fighterA, damageB, damageA)
+            // console.log(damage)
 
+            if (damage <= -100) {
+                initiativeB = -100
+                lifeB -= 3
+                console.log(`EPIC FAIL : ${fighterB.name} trips (-3PV => ${lifeB}/${initialLifeB}).`)
             }
 
-        // else if (initiative == 'B') {
+            else if (damage < -50) {
+                initiativeB /= 2
+                let punch = Math.floor(damageB * 0.1)
+                lifeA -= punch
+                console.log(`Blocked (-${punch}PV => ${lifeA}/${initialLifeA}).`)
+            }
 
-        //     if (initiativeB == fighterB.speed) {
-        //         console.log(`${fighterB.name}'s turn' !`)
-        //     }            
+            else if (damage < 0) {
+                let punch = Math.floor(damageB * 0.2)
+                lifeA -= punch
+                console.log(`Weak (-${punch}PV => ${lifeA}/${initialLifeA}).`)                
+            }
 
-        //     initiativeB /= 2
-        //     initiativeA = fighterA.speed
+            else if (damage < 50) {
+                let punch = Math.floor(damageB * 0.3)
+                lifeA -= punch
+                console.log(`Good (-${punch}PV => ${lifeA}/${initialLifeA}).`)                
+            }
 
-        //     if (attackCheck(fighterB, fighterA) > 0) {
+            else if (damage < 100) {
+                let punch = Math.floor(damageB * 0.4)
+                lifeA -= punch
+                console.log(`Strong (-${punch}PV => ${lifeA}/${initialLifeA}).`)
+            }
 
-        //         let damages = calcDamage(damageB)
-        //         lifeA -= damages
+            else {
+                initiativeB = fighterB.speed -1
+                let punch = Math.floor(damageB * 0.5)
+                lifeA -= punch
+                console.log(`CRITICAL : ${fighterA.name} stumbles (-${punch}PV => ${lifeA}/${initialLifeA}).`)
+            }
 
-        //         console.log(`${damages} points of damage : ${fighterA.name} now has ${lifeA} life points !`)
 
 
-        //     }
-        // }
-    // }
+    }
 
 
         if (lifeA <= 0) {
-            console.log(`${fighterA.name} falls on the ground... ${fighterB.name} is victorious ! \n`)
+            console.log(`\n${fighterA.name} falls on the ground... ${fighterB.name} is victorious ! \n`)
             return undefined
         }
 
         else if (lifeB <= 0) {
-            console.log(`${fighterB.name} falls on the ground... ${fighterA.name} is victorious ! \n`)
+            console.log(`\n${fighterB.name} falls on the ground... ${fighterA.name} is victorious ! \n`)
             return undefined
         }
     }

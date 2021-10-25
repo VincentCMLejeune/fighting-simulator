@@ -2,7 +2,7 @@ const dice = (faces = 20) => {return Math.ceil(Math.random()*faces)}
 
 export default function attackCheck(attacker, defender, damageAttacker, damageDefender) {
     let result = dice()
-    console.log('\nDice :', result)
+    // console.log('\nDice :', result)
 
     if (result == 1) {
         return -100
