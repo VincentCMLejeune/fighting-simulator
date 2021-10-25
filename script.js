@@ -126,27 +126,25 @@ const fight = (fighterA, fighterB) => {
 
             else if (damage < -50) {
                 initiativeA /= 2
-                let punch = Math.floor(damageA * 0.1)
-                lifeB -= punch
-                console.log(`Blocked (-${punch}PV => ${lifeB}/${initialLifeB}).`)
+                console.log(`Dodged...`)
             }
 
             else if (damage < 0) {
-                let punch = Math.floor(damageA * 0.2)
+                let punch = Math.floor(damageA * 0.1)
                 lifeB -= punch
-                console.log(`Weak (-${punch}PV => ${lifeB}/${initialLifeB}).`)                
+                console.log(`Blocked (-${punch}PV => ${lifeB}/${initialLifeB}).`)                
             }
 
             else if (damage < 50) {
-                let punch = Math.floor(damageA * 0.3)
+                let punch = Math.floor(damageA * 0.2)
                 lifeB -= punch
-                console.log(`Good (-${punch}PV => ${lifeB}/${initialLifeB}).`)                
+                console.log(`Hit (-${punch}PV => ${lifeB}/${initialLifeB}).`)                
             }
 
             else if (damage < 100) {
-                let punch = Math.floor(damageA * 0.4)
+                let punch = Math.floor(damageA * 0.3)
                 lifeB -= punch
-                console.log(`Strong (-${punch}PV => ${lifeB}/${initialLifeB}).`)
+                console.log(`Great (-${punch}PV => ${lifeB}/${initialLifeB}).`)
             }
 
             else {
@@ -176,27 +174,25 @@ const fight = (fighterA, fighterB) => {
 
             else if (damage < -50) {
                 initiativeB /= 2
-                let punch = Math.floor(damageB * 0.1)
-                lifeA -= punch
-                console.log(`Blocked (-${punch}PV => ${lifeA}/${initialLifeA}).`)
+                console.log(`Dodged...`)
             }
 
             else if (damage < 0) {
-                let punch = Math.floor(damageB * 0.2)
+                let punch = Math.floor(damageB * 0.1)
                 lifeA -= punch
-                console.log(`Weak (-${punch}PV => ${lifeA}/${initialLifeA}).`)                
+                console.log(`Blocked (-${punch}PV => ${lifeA}/${initialLifeA}).`)                
             }
 
             else if (damage < 50) {
-                let punch = Math.floor(damageB * 0.3)
+                let punch = Math.floor(damageB * 0.2)
                 lifeA -= punch
-                console.log(`Good (-${punch}PV => ${lifeA}/${initialLifeA}).`)                
+                console.log(`Hit (-${punch}PV => ${lifeA}/${initialLifeA}).`)                
             }
 
             else if (damage < 100) {
-                let punch = Math.floor(damageB * 0.4)
+                let punch = Math.floor(damageB * 0.3)
                 lifeA -= punch
-                console.log(`Strong (-${punch}PV => ${lifeA}/${initialLifeA}).`)
+                console.log(`Great (-${punch}PV => ${lifeA}/${initialLifeA}).`)
             }
 
             else {
