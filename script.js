@@ -1,6 +1,5 @@
 import attackCheck from "./attackCheck.js"
 import basicRoster from "./basicRoster.js"
-import calcDamage from "./calcDamage.js"
 import initiativeCheck from "./initiativeCheck.js"
 import pronoun from "./pronoun.js"
 class Fighter {
@@ -96,6 +95,7 @@ const fight = (fighterA, fighterB) => {
 
     let initiative
     let turns = 0
+    let first
 
     console.log(`${fighterA.name} VS ${fighterB.name} : FIGHT !`)
 
@@ -106,14 +106,13 @@ const fight = (fighterA, fighterB) => {
         initiative = initiativeCheck(initiativeA, initiativeB)
 
         if (initiative == 'A') {
-            if (initiativeA == fighterA.speed) {
-                console.log(`\n${fighterA.name}'s turn' !`)
-            }
+            first = initiativeA == fighterA.speed
+
             initiativeA /= 2
             initiativeB = fighterB.speed
 
-            let damage = attackCheck(fighterA, fighterB, damageA, damageB)
-            // console.log(damage)
+            let damage = attackCheck(fighterA, fighterB)
+
 
             if (damage <= -100) {
                 initiativeA = -100
@@ -123,25 +122,25 @@ const fight = (fighterA, fighterB) => {
 
             else if (damage < -50) {
                 initiativeA /= 2
-                console.log(`Dodged...`)
+                console.log(`${fighterB.name} dodged...`)
             }
 
             else if (damage < 0) {
                 let punch = Math.floor(damageA * 0.1)
                 lifeB -= punch
-                console.log(`Blocked (-${punch}PV => ${lifeB}/${initialLifeB}).`)                
+                console.log(`${first ? fighterA.name : pronoun(fighterA)} is blocked (-${punch}PV => ${lifeB}/${initialLifeB}).`)                
             }
 
             else if (damage < 50) {
                 let punch = Math.floor(damageA * 0.2)
                 lifeB -= punch
-                console.log(`Hit (-${punch}PV => ${lifeB}/${initialLifeB}).`)                
+                console.log(`${first ? fighterA.name : pronoun(fighterA)} hits (-${punch}PV => ${lifeB}/${initialLifeB}).`)                
             }
 
             else if (damage < 100) {
                 let punch = Math.floor(damageA * 0.3)
                 lifeB -= punch
-                console.log(`Great (-${punch}PV => ${lifeB}/${initialLifeB}).`)
+                console.log(`${first ? fighterA.name : pronoun(fighterA)} strikes ! (-${punch}PV => ${lifeB}/${initialLifeB}).`)
             }
 
             else {
@@ -154,14 +153,12 @@ const fight = (fighterA, fighterB) => {
             }
 
         else if (initiative == 'B') {
-            if (initiativeB == fighterB.speed) {
-                console.log(`\n${fighterB.name}'s turn' !`)
-            }
+            first = initiativeB == fighterB.speed
+
             initiativeB /= 2
             initiativeA = fighterA.speed
 
-            let damage = attackCheck(fighterB, fighterA, damageB, damageA)
-            // console.log(damage)
+            let damage = attackCheck(fighterB, fighterA)
 
             if (damage <= -100) {
                 initiativeB = -100
@@ -171,25 +168,25 @@ const fight = (fighterA, fighterB) => {
 
             else if (damage < -33) {
                 initiativeB /= 2
-                console.log(`Dodged...`)
+                console.log(`${fighterA.name} dodged...`)
             }
 
             else if (damage < 0) {
                 let punch = Math.floor(damageB * 0.1)
                 lifeA -= punch
-                console.log(`Blocked (-${punch}PV => ${lifeA}/${initialLifeA}).`)                
+                console.log(`${first ? fighterB.name : pronoun(fighterB)} is blocked (-${punch}PV => ${lifeA}/${initialLifeA}).`)                
             }
 
             else if (damage < 33) {
                 let punch = Math.floor(damageB * 0.2)
                 lifeA -= punch
-                console.log(`Hit (-${punch}PV => ${lifeA}/${initialLifeA}).`)                
+                console.log(`${first ? fighterB.name : pronoun(fighterB)} hits (-${punch}PV => ${lifeA}/${initialLifeA}).`)                
             }
 
             else if (damage < 100) {
                 let punch = Math.floor(damageB * 0.3)
                 lifeA -= punch
-                console.log(`Great (-${punch}PV => ${lifeA}/${initialLifeA}).`)
+                console.log(`${first ? fighterB.name : pronoun(fighterB)} strikes ! (-${punch}PV => ${lifeA}/${initialLifeA}).`)
             }
 
             else {
@@ -229,8 +226,8 @@ const fight = (fighterA, fighterB) => {
 // DE 0 A 29 (LES HEROS CORRESPONDANTS SONT PRECISES CI-DESSUS)
 
 
-let first = 28
-let second = 27
+let first = 7
+let second = 6
 
 
 fight(roster[first], roster[second])

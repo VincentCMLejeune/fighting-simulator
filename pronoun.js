@@ -1,11 +1,11 @@
 export default function pronoun(character, upperCase = true) {
     if (character.gender == 'Female') {
-        return 'She'
+        return upperCase ? 'She' : 'she'
     }
     else if (character.gender == 'Male') {
-        return 'He'
+        return upperCase ? 'He' : 'he'
     }
     else {
-        return 'It'
+        return upperCase ? 'It' : 'it'
     }
 }
